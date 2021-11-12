@@ -55,10 +55,10 @@ class ContenedorArchivo {
     async getById(num) {
         try{
             let data = await this.read();
-            let datos = await JSON.parse(data);
-            let result = await datos.filter( product => product.id == num);
+            let datos = JSON.parse(data);
+            let result = datos.filter( product => product.id == num);
             if (result != []){
-                return await result[0]
+                return result[0]
             }else{
                 return false;
             }
