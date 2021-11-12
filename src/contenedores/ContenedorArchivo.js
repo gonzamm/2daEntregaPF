@@ -8,8 +8,8 @@ class ContenedorArchivo {
 
      async read() {
         try {
-            let data2 = fs.readFileSync(this.name, 'utf8');
-            return data2;
+            let data = await fs.promises.readFile(this.name, 'utf8');
+            return data;
                  
         } catch (error) {
             throw Error("Error al leer el archivo");
