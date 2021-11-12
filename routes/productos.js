@@ -33,13 +33,13 @@ router.get("/:id", (req, res) =>{
     try{
       let ptoId = await productos.getById(req.params.id);
       //Me fijo si existe el PTO con el ID solicitado
-      if (ptoId === undefined || Object.keys(ptoId).length == 0 ){
+      if (Object.keys(ptoId).length != 0 ){
+        //Pto con ID solicitado encontrado, envio respuesta
+        res.send(ptoId)
+      }else{
         //Pto con ID solicitado NO encontrado, envio error
         res.status(400);
         res.send({ error : 'producto no encontrado' });
-      }else{
-        //Pto con ID solicitado encontrado, envio respuesta
-        res.send(ptoId)
       }
     }
     catch(error){
@@ -105,16 +105,16 @@ router.put("/:id", (req, res) =>{
     try {
       //Me fijo si existe el PTO con el ID solicitado
       let flag = await productos.getById(req.params.id);
-      if (flag === undefined || Object.keys(flag).length == 0 ){
-        //Pto con ID solicitado NO encontrado, envio error
-        res.status(400);
-        res.send({ error : 'producto no encontrado' });
-      }
-      else{
+      if (Object.keys(flag).length != 0 ){
         //Pto con ID solicitado encontrado
         //Borro el PTO con el ID solicitado, y envio respuesta
         await productos.update(ptoMod)
         res.send(ptoMod)  
+      }
+      else{
+        //Pto con ID solicitado NO encontrado, envio error
+        res.status(400);
+        res.send({ error : 'producto no encontrado' });
       }
     } catch (error) {
       throw Error("Error en put modificacion productos");
@@ -139,16 +139,16 @@ router.delete("/:id", (req,res) =>{
       //Me fijo si existe el PTO con el ID solicitado
 
       let flag = await productos.getById(req.params.id);
-      if (flag === undefined || Object.keys(flag).length == 0 ){
-        //PTO con ID no encontrado, envio error
-        res.status(400);
-        res.send({ error : 'producto no encontrado' });
-      }
-      else{
+      if (Object.keys(flag).length != 0 ){
         //Pto con ID solicitado encontrado
         //Borro el PTO con el ID solicitado, y envio respuesta
         await productos.deleteById(req.params.id);
         res.send(await productos.getAll()); 
+      }
+      else{
+        //PTO con ID no encontrado, envio error
+        res.status(400);
+        res.send({ error : 'producto no encontrado' });
       }
     } catch (error) {
       throw Error ("Error en el delete por id");
