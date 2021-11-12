@@ -96,18 +96,4 @@ class ContenedorFirebase {
     
 }
 
-/* const user = new ContenedorFirebase("users");
-const main = async()=>{
-    let aux = await user.getById("2")
-    console.log(aux);
-    let actualizacion = { age: 26, name: '2'}
-    let hola = await user.save(actualizacion)
-    console.log(hola);
-    user.deleteAll();
-    console.log("TODO OK");
-}
-
-main() */
-
-
 module.exports = ContenedorFirebase;
