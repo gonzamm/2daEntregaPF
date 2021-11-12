@@ -57,7 +57,7 @@ class ContenedorArchivo {
             let data = await this.read();
             let datos = JSON.parse(data);
             let result = datos.filter( product => product.id == num);
-            if (result != []){
+            if (result.length != 0){
                 return result[0]
             }else{
                 return false;
